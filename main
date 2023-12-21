@@ -1,0 +1,200 @@
+from turtle import Turtle, Screen
+from random import randint
+
+screen = Screen()
+screen.setup(width=1200, height=750)
+screen.bgcolor("black")
+
+t = Turtle()
+t.hideturtle()
+t.speed(0)
+t.color("white")
+t.penup()
+t.goto(-500, 300)
+t.pendown()
+t.forward(1000)
+t.right(90)
+t.forward(600)
+t.right(90)
+t.forward(1000)
+t.right(90)
+t.forward(600)
+t.right(90)
+t.forward(500)
+t.right(90)
+
+t1 = Turtle(shape="turtle")
+t1.color("blue")
+t1.penup()
+t1.speed(0)
+t1.goto(-350, 0)
+
+r = Turtle(shape="turtle")
+r.color("red")
+r.penup()
+r.speed(5)
+r.seth(180)
+r.goto(350, 0)
+
+
+gr = Turtle(shape="arrow")
+gr.color("black")
+gr.penup()
+gr.speed(3)
+
+
+a = 5
+b = 0
+d = 0
+j = 1
+g = 0
+
+c = Turtle(shape="square")
+c.color("white")
+c.penup()
+c.speed(0)
+c.goto(r.xcor(), r.ycor())
+c.seth(180)
+
+sq = Turtle(shape="square")
+sq.color("black")
+sq.penup()
+sq.speed(0)
+sq.seth(180)
+sq.goto(0, 600)
+
+
+def s():
+    t1.seth(270)
+    t1.forward(30)
+    t1.seth(0)
+
+
+def w():
+    t1.seth(90)
+    t1.forward(30)
+    t1.seth(0)
+
+
+
+screen.listen()
+screen.onkey(w, "w")
+screen.onkey(s, "s")
+
+i = 0
+while True:
+    c.forward(a)
+    sq.forward(g)
+
+    if c.xcor() <= -500:
+        r.goto(350, t1.ycor())
+        r.seth(180)
+
+        c.goto(r.xcor(), r.ycor())
+        c.seth(180)
+        if a < 14:
+            a = a + 2
+        b = b + 1
+        d = d + 1
+
+        if b == 10:
+            c.shapesize(2)
+            j = 2
+
+        if b == 15:
+            c.shapesize(3)
+            j = 3
+
+        if b == 20:
+            c.shapesize(4)
+            j = 4
+
+        if b == 25:
+            c.shapesize(5)
+            j = 5
+
+        if d == 35:
+            t.clear()
+            t.color("red")
+            t.seth(0)
+            t.penup()
+            t.goto(-500, 300)
+            t.pendown()
+            t.forward(1000)
+            t.right(90)
+            t.forward(600)
+            t.right(90)
+            t.forward(1000)
+            t.right(90)
+            t.forward(600)
+            t.right(90)
+            t.forward(500)
+            t.right(90)
+
+            r.shapesize(2)
+            sq.shapesize(5)
+            sq.goto(0, 0)
+            a = 14
+            g = 14
+            sq.color("white")
+
+        if d == 45:
+            gr.goto(-350, randint(-250, 250))
+            gr.color("green")
+            gr.seth(0)
+            gr.shapesize(2)
+
+    if sq.xcor() <= -500:
+        r.goto(350, t1.ycor())
+        r.seth(180)
+        sq.goto(r.xcor(), r.ycor())
+        sq.seth(180)
+
+    if gr.xcor() == -350 and t1.ycor() - 15 <= gr.ycor() <= t1.ycor() + 15:
+        gr.goto(350, r.ycor())
+        gr.color("black")
+        c.color("black")
+        r.color("black")
+        sq.color('black')
+        t.penup()
+        t.goto(-100, 0)
+        t.pendown()
+        t.color("green")
+        t.write(f"ПОБЕДА", font=("Arial", 40, "normal"))
+        break
+
+    if t1.xcor() - j * 10 <= c.xcor() <= t1.xcor() + j * 10 and t1.ycor() - j * 10 <= c.ycor() <= t1.ycor() + j * 10:
+        c.color("black")
+        t1.color("black")
+        sq.color('black')
+        t.penup()
+        t.goto(-100, 0)
+        t.pendown()
+        t.color("red")
+        t.write(f"ПОРАЖЕНИЕ", font=("Arial", 40, "normal"))
+        break
+    if t1.xcor() - j * 10 <= sq.xcor() <= t1.xcor() + j * 10 and t1.ycor() - j * 10 <= sq.ycor() <= t1.ycor() + j * 10:
+        c.color("black")
+        t1.color("black")
+        sq.color('black')
+        t.penup()
+        t.goto(-100, 0)
+        t.pendown()
+        t.color("red")
+        t.write(f"ПОРАЖЕНИЕ", font=("Arial", 40, "normal"))
+        break
+
+    if 300 <= t1.ycor() or t1.ycor() <= -300:
+        c.color("black")
+        t1.color("black")
+        sq.color('black')
+        t.penup()
+        t.goto(-100, 0)
+        t.pendown()
+        t.color("red")
+        t.write(f"ПОРАЖЕНИЕ", font=("Arial", 40, "normal"))
+        break
+
+
+
+screen.mainloop()
